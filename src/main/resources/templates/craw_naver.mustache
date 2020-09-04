@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품리뷰 관리자 페이지</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<ul>
+		<li><a href="/craw/list">크롤링키워드목록</a></li>
+		<li><a href="/craw/naver">전체크롤링</a></li>
+		<li><a href="/craw/clear">크롤링데이터 정리</a></li>
+	</ul>
+	<h1>네이버 크롤링 하기</h1>
+	<hr />
+	<form id="frm">
+		<select name="keyword"> 
+		{{#keywords}}
+			<option value="{{keyword}}">{{keyword}}</option> 
+		{{/keywords}}
+		</select>
+		<button onclick="crawNaver()">크롤링 시작</button>
+	</form>
+	<script type="text/javascript">
+		function crawNaver() {
+			let form_el = $("#frm");
+			let data = form_el.serialize(); // form 안의 name 속성을 직렬화 한다
+
+			fetch(
+			"/craw/naver/proc",
+			{
+				method : "post",
+				body : data,
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'
+				}
+
+			},120000).then(function(resp) {
+				return resp.text();
+			}).then(function(resp) {
+				alert(resp);
+			}).catch(function(error){
+				alert(error);
+			});
+		}
+	</script>
+</body>
+</html>
