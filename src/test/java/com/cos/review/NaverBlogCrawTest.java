@@ -50,7 +50,7 @@ public class NaverBlogCrawTest {
 		
 	}
 	
-//	@Test
+	//403오류가 뜨면 10분정도 기다렸다가 테스트에서 한번만 샘플로 요청 후 하면됨.
 	public void 제품리뷰_블로그_크롤링() {
 		int start = 1; //10씩 증가하면 됨.
 		
